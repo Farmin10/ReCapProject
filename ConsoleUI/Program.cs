@@ -3,6 +3,7 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemoryCarDal;
+using Entities.Concrete;
 
 namespace ConsoleUI
 {
@@ -10,10 +11,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            BrandManager carManager = new BrandManager(new EfBrandDal());
-            foreach (var car in carManager.GetAll())
+            CarManager carManager = new CarManager(new EfCarDal());
+            Car car = new Car() {BrandId=2, ColorId=3, DailyPrice = 30000, Description = "Dubay Cars", ModelYear = DateTime.Now };
+            carManager.Add(car);
+            foreach (var cars in carManager.GetAll())
             {
-                Console.WriteLine(car.BrandName);
+                Console.WriteLine(cars.DailyPrice);
             }
         }
     }

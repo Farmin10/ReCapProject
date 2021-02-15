@@ -13,50 +13,27 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Brand Entity)
         {
-            using (ReCapContext contex=new ReCapContext())
-            {
-               var addedEntity= contex.Entry(Entity);
-                addedEntity.State = EntityState.Added;
-                contex.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
 
         public void Delete(Brand Entity)
         {
-            using (ReCapContext contex = new ReCapContext())
-            {
-                var deletedEntity = contex.Entry(Entity);
-                deletedEntity.State = EntityState.Deleted;
-                contex.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            using (ReCapContext contex = new ReCapContext())
-            {
-                return  contex.Set<Brand>().SingleOrDefault(filter);
-            }
-            
+            throw new NotImplementedException();
         }
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            using (ReCapContext contex = new ReCapContext())
-            {
-                return filter == null ? contex.Set<Brand>().ToList() : contex.Set<Brand>().Where(filter).ToList();
-            }
-            
+            throw new NotImplementedException();
         }
 
         public void Update(Brand Entity)
         {
-            using (ReCapContext contex = new ReCapContext())
-            {
-                var updatedEntity = contex.Entry(Entity);
-                updatedEntity.State = EntityState.Modified;
-                contex.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
     }
 }

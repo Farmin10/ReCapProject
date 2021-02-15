@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -11,27 +13,50 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car Entity)
         {
-            throw new NotImplementedException();
+            using (ReCapContext contex = new ReCapContext())
+            {
+                var addedEntity = contex.Entry(Entity);
+                addedEntity.State = EntityState.Added;
+                contex.SaveChanges();
+            }
         }
 
         public void Delete(Car Entity)
         {
-            throw new NotImplementedException();
+            using (ReCapContext contex = new ReCapContext())
+            {
+                var deletedEntity = contex.Entry(Entity);
+                deletedEntity.State = EntityState.Deleted;
+                contex.SaveChanges();
+            }
         }
 
         public Car Get(Expression<Func<Car, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (ReCapContext contex = new ReCapContext())
+            {
+                return contex.Set<Car>().SingleOrDefault(filter);
+            }
+
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (ReCapContext contex = new ReCapContext())
+            {
+                return filter == null ? contex.Set<Car>().ToList() : contex.Set<Car>().Where(filter).ToList();
+            }
+
         }
 
         public void Update(Car Entity)
         {
-            throw new NotImplementedException();
+            using (ReCapContext contex = new ReCapContext())
+            {
+                var updatedEntity = contex.Entry(Entity);
+                updatedEntity.State = EntityState.Modified;
+                contex.SaveChanges();
+            }
         }
     }
 }
